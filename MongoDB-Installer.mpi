@@ -249,7 +249,9 @@ File ::C302044E-DDF8-4936-8CD2-8EE318423498 -name uninstallService.bat -parent E
 File ::F0EADB10-471B-4885-AD84-EDDC27CAF34F -type dir -name {I:/installer projects/MongoDB-Installer/files/conf} -parent 9A70A4C9-42E9-4F31-9C99-457EAD6B980B
 File ::FAB87ACA-060F-4A28-B53A-3AF4D2B6A483 -name mongodb.conf -parent F0EADB10-471B-4885-AD84-EDDC27CAF34F
 File ::E015151C-3CFD-4141-927D-B95B343F9571 -type dir -name {I:/installer projects/MongoDB-Installer/files/data} -parent 9A70A4C9-42E9-4F31-9C99-457EAD6B980B
+File ::B24CB49A-2255-469E-9756-0B958EFB76A2 -name README.txt -parent E015151C-3CFD-4141-927D-B95B343F9571
 File ::2D95F80F-8DC4-462A-ACEF-D8022E736E14 -type dir -name {I:/installer projects/MongoDB-Installer/files/logs} -parent 9A70A4C9-42E9-4F31-9C99-457EAD6B980B
+File ::D84301DC-F687-4973-9233-7235C3D3828B -name README.txt -parent 2D95F80F-8DC4-462A-ACEF-D8022E736E14
 FileGroup ::69DA1B4B-DDA2-413F-B267-191801CA691B -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-5-x86 FreeBSD-6-x86 FreeBSD-7-x86 HPUX-hppa Linux-x86 Linux-x86_64 Solaris-sparc Solaris-x86 Windows TarArchive ZipArchive} -name binaries -parent FileGroups
 File ::D027CBE9-1734-414F-AB8D-0E5E891DB64A -name {I:/installer projects/MongoDB-Installer/files/binaries/2.2.0.zip} -alias bins -parent 69DA1B4B-DDA2-413F-B267-191801CA691B
 Component ::51728A49-5C6C-4331-A6F3-8C722BAA0712 -setup Install -active Yes -platforms {AIX-ppc FreeBSD-4-x86 FreeBSD-5-x86 FreeBSD-6-x86 FreeBSD-7-x86 HPUX-hppa Linux-x86 Linux-x86_64 Solaris-sparc Solaris-x86 Windows} -name {Default Component} -parent Components
@@ -272,6 +274,7 @@ InstallComponent C7E0AF5D-BEF3-48B9-861A-EC9969F70ECA -setup Install -type pane 
 InstallComponent AC71C447-E0E6-480B-BA89-3B1BE14082FB -setup Install -type pane -title {Copying Files} -component CopyFiles -active Yes -parent StandardInstall
 InstallComponent 74E69AC2-8475-4FA5-8D2D-65F749B035BC -setup Install -type action -title {Disable Buttons} -component ModifyWidget -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
 InstallComponent D3BFD176-2E25-4F58-82CB-A080D79EBD77 -setup Install -type action -title {Install Everything} -component ExecuteAction -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
+InstallComponent 8F6CC918-6D44-4129-A7F4-D7BD02912D8F -setup Install -type action -title installBinary -component ExecuteAction -alias installBinary -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
 InstallComponent C7C8749F-4512-46D7-A82E-D2D83A93D67B -setup Install -type action -title {Move Forward} -component MoveForward -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
 InstallComponent 51948C4B-B669-4F6E-8466-FFC9C7233C83 -setup Install -type pane -title {Setup Complete} -component SetupComplete -active Yes -parent StandardInstall
 InstallComponent CA034F4E-8E2C-44DE-A870-4F8C6976E51D -setup Install -type action -conditions {6BC87953-8E86-4961-92ED-B1BBCC028D75 13544B2F-1C8D-45DC-BAAE-763D6CF192F0} -title {View Readme Checkbutton} -component AddWidget -active Yes -parent 51948C4B-B669-4F6E-8466-FFC9C7233C83
@@ -332,9 +335,6 @@ Condition 12DF582E-7A23-43F3-A798-8616E0D5D8AD -active Yes -parent AE214483-D368
 InstallComponent 811A0CD3-A7D6-4E96-93BE-BBB81B1C15BF -setup Install -type action -conditions BB4BF04F-38D4-4CF8-9B58-C53B653EAFB7 -title {Uninstall Shortcut} -component InstallProgramFolderShortcut -active Yes -parent 13143E46-6146-4008-AC7D-6E87A581E48A
 Condition BB4BF04F-38D4-4CF8-9B58-C53B653EAFB7 -active Yes -parent 811A0CD3-A7D6-4E96-93BE-BBB81B1C15BF -title {String Is Condition} -component StringIsCondition -TreeObject::id BB4BF04F-38D4-4CF8-9B58-C53B653EAFB7
 InstallComponent ADF585CB-D095-4FBF-8AE3-6A101E41F74C -setup Install -type action -title {Install Selected Files} -component InstallSelectedFiles -active Yes -parent 13143E46-6146-4008-AC7D-6E87A581E48A
-InstallComponent 8E8170C0-C10E-4BC8-BEFF-C5F7C0B137AD -setup Install -type action -title {Unpack Stored File} -component UnpackStoredFile -active Yes -parent 13143E46-6146-4008-AC7D-6E87A581E48A
-InstallComponent A7AD6977-00EB-4456-A7AC-BB095B6186FF -setup Install -type action -title {Unzip File} -component UnzipFile -active Yes -parent 13143E46-6146-4008-AC7D-6E87A581E48A
-InstallComponent 4EA84232-D2DE-4166-A54B-5D24D73C44DA -setup Install -type action -title {Delete File} -component DeleteFile -active Yes -parent 13143E46-6146-4008-AC7D-6E87A581E48A
 InstallComponent 088AFA79-022E-4B63-A8FB-F2C430DA80EB -setup Install -type actiongroup -title {Finish Actions} -alias {Finish Actions} -active Yes -parent ActionGroupsInstall
 InstallComponent FB0985B8-0E96-4972-81AE-BD51962D37EE -setup Install -type action -conditions {4CCCF635-E33C-43B7-A4AB-BF78271D0B76 B27C6F0A-7F3D-4D9E-B625-11C6A4CBA40B} -title {Install Desktop Shortcut} -component InstallDesktopShortcut -active Yes -parent 088AFA79-022E-4B63-A8FB-F2C430DA80EB
 Condition 4CCCF635-E33C-43B7-A4AB-BF78271D0B76 -active Yes -parent FB0985B8-0E96-4972-81AE-BD51962D37EE -title {String Is Condition} -component StringIsCondition -TreeObject::id 4CCCF635-E33C-43B7-A4AB-BF78271D0B76
@@ -351,6 +351,10 @@ Condition 9961F71A-82D0-46C0-9E91-CD2AAC1F3936 -active Yes -parent 0B11C207-6E76
 Condition A8E3BF88-17B8-4F9E-9300-94A6B14EE34B -active Yes -parent 0B11C207-6E76-4079-8867-CE85A45056FE -title {String Is Condition} -component StringIsCondition -TreeObject::id A8E3BF88-17B8-4F9E-9300-94A6B14EE34B
 Condition E75FFFDF-F971-4BB2-AADA-62D8419B982C -active Yes -parent 0B11C207-6E76-4079-8867-CE85A45056FE -title {File Exists Condition} -component FileExistsCondition -TreeObject::id E75FFFDF-F971-4BB2-AADA-62D8419B982C
 InstallComponent E4259582-CD91-4E06-9251-143685D0D833 -setup Install -type actiongroup -title {Cancel Actions} -alias {Cancel Actions} -active Yes -parent ActionGroupsInstall
+InstallComponent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F -setup Install -type actiongroup -title installBinary -alias installbins -active Yes -parent ActionGroupsInstall
+InstallComponent 8E8170C0-C10E-4BC8-BEFF-C5F7C0B137AD -setup Install -type action -title {Unpack Stored File} -component UnpackStoredFile -active Yes -parent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F
+InstallComponent A7AD6977-00EB-4456-A7AC-BB095B6186FF -setup Install -type action -title {Unzip File} -component UnzipFile -active Yes -parent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F
+InstallComponent 4EA84232-D2DE-4166-A54B-5D24D73C44DA -setup Install -type action -title {Delete File} -component DeleteFile -active Yes -parent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F
 InstallComponent AAF3D379-0592-43BD-980F-9F50BE87F6FB -setup Uninstall -type pane -title Uninstall -component Uninstall -active Yes -parent StandardUninstall
 InstallComponent 7378685A-6BC7-4AFF-89FE-DEE8162C2B3E -setup Uninstall -type action -title {Modify Widget} -component ModifyWidget -active Yes -parent AAF3D379-0592-43BD-980F-9F50BE87F6FB
 InstallComponent B243B740-711F-4EB8-BA9D-D33BB8635B83 -setup Uninstall -type action -title {Execute Action} -component ExecuteAction -active Yes -parent AAF3D379-0592-43BD-980F-9F50BE87F6FB
@@ -930,6 +934,15 @@ array set Properties {
 8EFA6014-D748-4B6F-B5ED-869AF9DD0302,String
 {<%InstallStopped%>}
 
+8F6CC918-6D44-4129-A7F4-D7BD02912D8F,Action
+{installbins}
+
+8F6CC918-6D44-4129-A7F4-D7BD02912D8F,Alias
+{installBinary}
+
+8F6CC918-6D44-4129-A7F4-D7BD02912D8F,Conditions
+{0 conditions}
+
 92E06D80-9CA8-492A-93EA-8084D28BB9E9,CheckCondition
 {Before Action is Executed}
 
@@ -964,7 +977,7 @@ array set Properties {
 {<%InstallDir%>}
 
 9A70A4C9-42E9-4F31-9C99-457EAD6B980B,FileSize
-{8881}
+{8611}
 
 9A70A4C9-42E9-4F31-9C99-457EAD6B980B,Name
 {Program Files}
@@ -1112,6 +1125,9 @@ AC71C447-E0E6-480B-BA89-3B1BE14082FB,CancelButton,subst
 
 AC71C447-E0E6-480B-BA89-3B1BE14082FB,Caption,subst
 {1}
+
+AC71C447-E0E6-480B-BA89-3B1BE14082FB,Conditions
+{0 conditions}
 
 AC71C447-E0E6-480B-BA89-3B1BE14082FB,FileLabel,subst
 {1}
@@ -1308,6 +1324,9 @@ C1007B50-7475-485D-9E05-EEB79FBC9666,Filename
 C66536F9-DBDD-4040-B343-DC7184B13633,Alias
 {Finish Actions}
 
+C7C8749F-4512-46D7-A82E-D2D83A93D67B,Conditions
+{0 conditions}
+
 C7E0AF5D-BEF3-48B9-861A-EC9969F70ECA,BackButton,subst
 {1}
 
@@ -1388,6 +1407,9 @@ D10C9C8D-4D2B-428B-8EFB-EF6883565AE4,Permission
 
 D3BFD176-2E25-4F58-82CB-A080D79EBD77,Action
 {Install Actions}
+
+D3BFD176-2E25-4F58-82CB-A080D79EBD77,Conditions
+{0 conditions}
 
 D7B4F4B2-0F89-40C7-BACC-8248BE52FE0E,CheckCondition
 {Before Action is Executed}
@@ -1481,6 +1503,12 @@ ED4557D2-FAB6-458A-8487-C61B89601599,Operator
 
 ED4557D2-FAB6-458A-8487-C61B89601599,String
 {<%InstallStopped%>}
+
+F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F,Alias
+{installbins}
+
+F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F,Conditions
+{0 conditions}
 
 F6F3A366-79B4-4EC8-9897-BA6B50D6590D,Conditions
 {1 condition}
