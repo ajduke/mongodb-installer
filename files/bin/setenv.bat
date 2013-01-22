@@ -6,13 +6,13 @@ rem Author 			: 	ajduke
 
 
 rem port for mongodb to listen
-set port=27017
+set port=@@port@@
 
 rem the title for all the console windows
 set title=MongoDB running on %port%
 
 rem configuration file for the mongodb, absolute path in mandatory
-set configFile=I:\Servers\mongodb\config\mongodb.conf
+set configFile=@@install-dir@@\conf\mongod.conf
 
 rem the services config params
 set serviceName=mdb%port%

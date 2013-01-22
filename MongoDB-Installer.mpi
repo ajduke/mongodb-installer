@@ -36,7 +36,7 @@ CompressionMethod
 {zlib}
 
 Copyright
-{}
+{@ajduke.in}
 
 CreateDesktopShortcut
 {Yes}
@@ -81,7 +81,7 @@ InstallPassword
 {}
 
 InstallVersion
-{1.0.0.0}
+{0.2.0.0}
 
 Language,ca
 {Yes}
@@ -192,7 +192,7 @@ UpgradeApplicationID
 {}
 
 Version
-{1.0}
+{0.2}
 
 ViewReadme
 {Yes}
@@ -247,7 +247,7 @@ File ::224D0458-FB4B-42CF-ABB6-B96D5D52D77F -name stats.bat -parent EB2C5F11-F26
 File ::85F7BA2D-2E2F-4B18-9C7C-D9C3902048EA -name stopm.bat -parent EB2C5F11-F264-4B50-B881-619A1F1DE5AD
 File ::C302044E-DDF8-4936-8CD2-8EE318423498 -name uninstallService.bat -parent EB2C5F11-F264-4B50-B881-619A1F1DE5AD
 File ::F0EADB10-471B-4885-AD84-EDDC27CAF34F -type dir -name {I:/installer projects/MongoDB-Installer/files/conf} -parent 9A70A4C9-42E9-4F31-9C99-457EAD6B980B
-File ::FAB87ACA-060F-4A28-B53A-3AF4D2B6A483 -name mongodb.conf -parent F0EADB10-471B-4885-AD84-EDDC27CAF34F
+File ::A468C78A-7199-48A5-A4A2-ACFC1AF5B2C0 -name mongod.conf -parent F0EADB10-471B-4885-AD84-EDDC27CAF34F
 File ::E015151C-3CFD-4141-927D-B95B343F9571 -type dir -name {I:/installer projects/MongoDB-Installer/files/data} -parent 9A70A4C9-42E9-4F31-9C99-457EAD6B980B
 File ::B24CB49A-2255-469E-9756-0B958EFB76A2 -name README.txt -parent E015151C-3CFD-4141-927D-B95B343F9571
 File ::2D95F80F-8DC4-462A-ACEF-D8022E736E14 -type dir -name {I:/installer projects/MongoDB-Installer/files/logs} -parent 9A70A4C9-42E9-4F31-9C99-457EAD6B980B
@@ -275,6 +275,8 @@ InstallComponent AC71C447-E0E6-480B-BA89-3B1BE14082FB -setup Install -type pane 
 InstallComponent 74E69AC2-8475-4FA5-8D2D-65F749B035BC -setup Install -type action -title {Disable Buttons} -component ModifyWidget -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
 InstallComponent D3BFD176-2E25-4F58-82CB-A080D79EBD77 -setup Install -type action -title {Install Everything} -component ExecuteAction -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
 InstallComponent 8F6CC918-6D44-4129-A7F4-D7BD02912D8F -setup Install -type action -title installBinary -component ExecuteAction -alias installBinary -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
+InstallComponent 5D584623-58AD-4B82-98AE-146713708262 -setup Install -type action -title conf -component ReplaceTextInFile -alias conf -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
+InstallComponent 5D86ABA2-E260-4499-A831-715521EC731D -setup Install -type action -title services -component ExecuteAction -alias services -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
 InstallComponent C7C8749F-4512-46D7-A82E-D2D83A93D67B -setup Install -type action -title {Move Forward} -component MoveForward -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
 InstallComponent 51948C4B-B669-4F6E-8466-FFC9C7233C83 -setup Install -type pane -title {Setup Complete} -component SetupComplete -active Yes -parent StandardInstall
 InstallComponent CA034F4E-8E2C-44DE-A870-4F8C6976E51D -setup Install -type action -conditions {6BC87953-8E86-4961-92ED-B1BBCC028D75 13544B2F-1C8D-45DC-BAAE-763D6CF192F0} -title {View Readme Checkbutton} -component AddWidget -active Yes -parent 51948C4B-B669-4F6E-8466-FFC9C7233C83
@@ -355,9 +357,15 @@ InstallComponent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F -setup Install -type actio
 InstallComponent 8E8170C0-C10E-4BC8-BEFF-C5F7C0B137AD -setup Install -type action -title {Unpack Stored File} -component UnpackStoredFile -active Yes -parent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F
 InstallComponent A7AD6977-00EB-4456-A7AC-BB095B6186FF -setup Install -type action -title {Unzip File} -component UnzipFile -active Yes -parent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F
 InstallComponent 4EA84232-D2DE-4166-A54B-5D24D73C44DA -setup Install -type action -title {Delete File} -component DeleteFile -active Yes -parent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F
+InstallComponent F56743B6-E53B-4858-BBF8-6E29CAD80938 -setup Install -type actiongroup -title win-services -alias win-services -active Yes -parent ActionGroupsInstall
+InstallComponent 27113E0D-F11B-475E-A10E-7FBE7C1D4871 -setup Install -type action -title {bat file replace txt} -component ReplaceTextInFile -alias {bat file replace txt} -active Yes -parent F56743B6-E53B-4858-BBF8-6E29CAD80938
+InstallComponent D97CE82E-D55A-46C7-B53B-CB47D4B07E33 -setup Install -type action -title win-service-creation -component ExecuteExternalProgram -alias win-service-creation -active Yes -parent F56743B6-E53B-4858-BBF8-6E29CAD80938
+InstallComponent AB490B07-002D-47A8-B48A-38038AABE5A4 -setup Install -type action -title {Message Box} -component MessageBox -active Yes -parent F56743B6-E53B-4858-BBF8-6E29CAD80938
 InstallComponent AAF3D379-0592-43BD-980F-9F50BE87F6FB -setup Uninstall -type pane -title Uninstall -component Uninstall -active Yes -parent StandardUninstall
 InstallComponent 7378685A-6BC7-4AFF-89FE-DEE8162C2B3E -setup Uninstall -type action -title {Modify Widget} -component ModifyWidget -active Yes -parent AAF3D379-0592-43BD-980F-9F50BE87F6FB
+InstallComponent CE39A191-F220-4964-A510-B1FF7DB0A363 -setup Uninstall -type action -title win-service-deletion -component ExecuteExternalProgram -alias win-service-deletion -active Yes -parent AAF3D379-0592-43BD-980F-9F50BE87F6FB
 InstallComponent B243B740-711F-4EB8-BA9D-D33BB8635B83 -setup Uninstall -type action -title {Execute Action} -component ExecuteAction -active Yes -parent AAF3D379-0592-43BD-980F-9F50BE87F6FB
+InstallComponent 78D589FC-8926-4746-8816-D54FC92FB0EB -setup Uninstall -type action -title {Uninstall Leftover Files} -component UninstallLeftoverFiles -active Yes -parent AAF3D379-0592-43BD-980F-9F50BE87F6FB
 InstallComponent 0F325F33-A410-48A7-87CC-C66159C38DA3 -setup Uninstall -type action -title {Move Forward} -component MoveForward -active Yes -parent AAF3D379-0592-43BD-980F-9F50BE87F6FB
 InstallComponent A1E6A98D-B4D9-4E36-A556-7F036207C52A -setup Uninstall -type pane -conditions C92CEB72-65BF-4785-B8E0-25109C131ABA -title {Uninstall Details} -component UninstallDetails -active Yes -parent StandardUninstall
 Condition C92CEB72-65BF-4785-B8E0-25109C131ABA -active Yes -parent A1E6A98D-B4D9-4E36-A556-7F036207C52A -title {String Is Condition} -component StringIsCondition -TreeObject::id C92CEB72-65BF-4785-B8E0-25109C131ABA
@@ -442,6 +450,9 @@ array set Properties {
 0B30A7E3-135D-4B02-9DFE-8FB76AED4E96,Title,subst
 {1}
 
+0F325F33-A410-48A7-87CC-C66159C38DA3,Conditions
+{0 conditions}
+
 12D82331-EAFC-4673-AA36-233F894EB8C6,CheckCondition
 {Before Action is Executed}
 
@@ -513,6 +524,20 @@ array set Properties {
 
 23106B15-2AE3-46B7-B69B-D2CA23B59828,TrueValue
 {No}
+
+27113E0D-F11B-475E-A10E-7FBE7C1D4871,Alias
+{bat file replace txt}
+
+27113E0D-F11B-475E-A10E-7FBE7C1D4871,Conditions
+{0 conditions}
+
+27113E0D-F11B-475E-A10E-7FBE7C1D4871,Files
+{<%InstallDir%>\bin\install-service.bat;<%InstallDir%>\bin\uninstall-service.bat}
+
+27113E0D-F11B-475E-A10E-7FBE7C1D4871,StringMap
+{@@server-name@@	"MongoDB Server"
+@@install-dir@@	<%InstallDir%>
+@@port@@	27017}
 
 292AB01D-6E34-4A2D-AC49-B0DDA0E984C8,CheckCondition
 {Before Action is Executed}
@@ -748,6 +773,29 @@ array set Properties {
 5BF962DE-D4BA-466D-A7A5-6C7194CE3083,Y
 {180}
 
+5D584623-58AD-4B82-98AE-146713708262,Alias
+{conf}
+
+5D584623-58AD-4B82-98AE-146713708262,Conditions
+{0 conditions}
+
+5D584623-58AD-4B82-98AE-146713708262,Files
+{<%InstallDir%>/conf/mongod.conf;<%InstallDir%>/bin/setenv.bat}
+
+5D584623-58AD-4B82-98AE-146713708262,StringMap
+{@@replicaset@@	<%replSetTxt%>
+@@port@@	27017
+@@install-dir@@	<%InstallDir%>}
+
+5D86ABA2-E260-4499-A831-715521EC731D,Action
+{win-services}
+
+5D86ABA2-E260-4499-A831-715521EC731D,Alias
+{services}
+
+5D86ABA2-E260-4499-A831-715521EC731D,Conditions
+{0 conditions}
+
 5F01F957-1621-4040-8621-E5EB7B9446D5,Message,subst
 {1}
 
@@ -826,6 +874,9 @@ array set Properties {
 6BF41CDC-1E1A-44EE-8C46-9C6639D05F5E,Caption,subst
 {1}
 
+6BF41CDC-1E1A-44EE-8C46-9C6639D05F5E,Conditions
+{0 conditions}
+
 6BF41CDC-1E1A-44EE-8C46-9C6639D05F5E,Message,subst
 {1}
 
@@ -844,6 +895,9 @@ array set Properties {
 73110078-CA4E-4BF8-BAD2-86768903E330,String
 {<%InstallStopped%>}
 
+7378685A-6BC7-4AFF-89FE-DEE8162C2B3E,Conditions
+{0 conditions}
+
 7378685A-6BC7-4AFF-89FE-DEE8162C2B3E,ExecuteAction
 {Before Pane is Displayed}
 
@@ -861,6 +915,9 @@ array set Properties {
 
 74E69AC2-8475-4FA5-8D2D-65F749B035BC,Widget
 {Back Button;Next Button}
+
+78D589FC-8926-4746-8816-D54FC92FB0EB,Conditions
+{0 conditions}
 
 7BED829F-9486-46ED-96F5-29A5F27E78F2,Background
 {#FFFFFF}
@@ -977,7 +1034,7 @@ array set Properties {
 {<%InstallDir%>}
 
 9A70A4C9-42E9-4F31-9C99-457EAD6B980B,FileSize
-{8611}
+{8618}
 
 9A70A4C9-42E9-4F31-9C99-457EAD6B980B,Name
 {Program Files}
@@ -1113,6 +1170,15 @@ AB3ACB17-B748-4EE3-B6F6-237BD1ED0566,CheckCondition
 
 AB3ACB17-B748-4EE3-B6F6-237BD1ED0566,String
 {<%GuiMode%>}
+
+AB490B07-002D-47A8-B48A-38038AABE5A4,Conditions
+{0 conditions}
+
+AB490B07-002D-47A8-B48A-38038AABE5A4,Message,subst
+{1}
+
+AB490B07-002D-47A8-B48A-38038AABE5A4,Title,subst
+{1}
 
 AB99FB5C-AFD5-4DE1-984E-653E2C4687E7,Alias
 {Setup Actions}
@@ -1255,6 +1321,9 @@ B13D7E8A-DE90-42F7-A68C-D6663935F7E5,Prompt
 B243B740-711F-4EB8-BA9D-D33BB8635B83,Action
 {Uninstall Actions}
 
+B243B740-711F-4EB8-BA9D-D33BB8635B83,Conditions
+{0 conditions}
+
 B27C6F0A-7F3D-4D9E-B625-11C6A4CBA40B,CheckCondition
 {Before Action is Executed}
 
@@ -1393,6 +1462,27 @@ CA034F4E-8E2C-44DE-A870-4F8C6976E51D,Y
 CCA03911-3CED-43ED-9AB8-1A7D506B1FB6,ExitType
 {Finish}
 
+CE39A191-F220-4964-A510-B1FF7DB0A363,Alias
+{win-service-deletion}
+
+CE39A191-F220-4964-A510-B1FF7DB0A363,Conditions
+{0 conditions}
+
+CE39A191-F220-4964-A510-B1FF7DB0A363,ExecuteAsRoot
+{Yes}
+
+CE39A191-F220-4964-A510-B1FF7DB0A363,ProgramCommandLine
+{uninstallService}
+
+CE39A191-F220-4964-A510-B1FF7DB0A363,ResultVirtualText
+{ServicesResult}
+
+CE39A191-F220-4964-A510-B1FF7DB0A363,StatusVirtualText
+{ServicesStatus}
+
+CE39A191-F220-4964-A510-B1FF7DB0A363,WorkingDirectory
+{<%InstallDir%>\bin}
+
 D10C9C8D-4D2B-428B-8EFB-EF6883565AE4,CheckCondition
 {Before Next Pane is Displayed}
 
@@ -1419,6 +1509,30 @@ D7B4F4B2-0F89-40C7-BACC-8248BE52FE0E,String
 
 D8320AA6-736B-447C-9086-02F28A71184D,ExitType
 {Finish}
+
+D97CE82E-D55A-46C7-B53B-CB47D4B07E33,Alias
+{win-service-creation}
+
+D97CE82E-D55A-46C7-B53B-CB47D4B07E33,Conditions
+{0 conditions}
+
+D97CE82E-D55A-46C7-B53B-CB47D4B07E33,ExecuteAsRoot
+{Yes}
+
+D97CE82E-D55A-46C7-B53B-CB47D4B07E33,ExecuteInConsole
+{Yes}
+
+D97CE82E-D55A-46C7-B53B-CB47D4B07E33,ProgramCommandLine
+{installService}
+
+D97CE82E-D55A-46C7-B53B-CB47D4B07E33,ResultVirtualText
+{ServicesResult}
+
+D97CE82E-D55A-46C7-B53B-CB47D4B07E33,StatusVirtualText
+{ServicesStatus}
+
+D97CE82E-D55A-46C7-B53B-CB47D4B07E33,WorkingDirectory
+{<%InstallDir%>\bin}
 
 DD026814-087A-4BC9-872C-0064292B3BBC,Background
 {#FFFFFF}
@@ -1508,6 +1622,12 @@ F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F,Alias
 {installbins}
 
 F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F,Conditions
+{0 conditions}
+
+F56743B6-E53B-4858-BBF8-6E29CAD80938,Alias
+{win-services}
+
+F56743B6-E53B-4858-BBF8-6E29CAD80938,Conditions
 {0 conditions}
 
 F6F3A366-79B4-4EC8-9897-BA6B50D6590D,Conditions
@@ -2093,7 +2213,7 @@ Windows,BuildSeparateArchives
 {No}
 
 Windows,Executable
-{<%AppName%>-<%Version%>-Setup<%Ext%>}
+{<%AppName%>-Installer <%Version%>-Setup<%Ext%>}
 
 Windows,FileDescription
 {<%AppName%> <%Version%> Setup}
@@ -2301,6 +2421,12 @@ FDC2A0D0-765A-4D81-9E95-145361A9A35B,Message
 
 A9BB04A2-3F4D-4D78-AA55-79EB201BE95E,Message
 {<%UninstallingApplicationText%>}
+
+AB490B07-002D-47A8-B48A-38038AABE5A4,Message
+{<%ServicesResult%>}
+
+AB490B07-002D-47A8-B48A-38038AABE5A4,Title
+{ServicesResult}
 
 CA034F4E-8E2C-44DE-A870-4F8C6976E51D,Text
 {<%ViewReadmeText%>}
