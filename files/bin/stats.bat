@@ -8,6 +8,6 @@ rem Author 		: 	ajduke
 rem displays the stats in file 
 
 call setenv.bat
-title %title% 
+title "%title%"
 
 mongostat 5 --port %port% > ..\logs\stats.log

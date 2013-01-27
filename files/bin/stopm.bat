@@ -7,4 +7,4 @@ rem Author 		: 	ajduke
 
 @call setenv.bat
 
-@taskkill /im mongod.exe /fi "WINDOWTITLE eq %title%
+@taskkill /im mongod.exe /fi "WINDOWTITLE eq %title%"

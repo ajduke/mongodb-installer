@@ -7,4 +7,4 @@ rem Author 		: 	ajduke
 
 @call setenv.bat
 
-@start "%title%" mongod -f %configFile%
+@start "%title%" mongod -f "%configFile%"

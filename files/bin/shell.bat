@@ -12,7 +12,7 @@ rem stuff like cmd prompt title
 call setenv.bat
 set EXECUTABLE=mongo
 set name=Mongodb Shell
-title %title%
+title "%title%"
 
 rem check for params, if any
 if [%1]==[]  goto local 
