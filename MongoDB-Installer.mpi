@@ -274,6 +274,7 @@ Condition 7BFE093A-53A2-42A2-BEC3-18FC3F857BDA -active Yes -parent B7A32B02-23D6
 InstallComponent AE5BA5EC-E8CC-495A-969C-D8F9425EA485 -setup Install -type action -title {Populate Components} -component PopulateComponents -active Yes -parent B7A32B02-23D6-4388-B4BC-3D8ABE6DF2BD
 InstallComponent C7E0AF5D-BEF3-48B9-861A-EC9969F70ECA -setup Install -type pane -title {Start Copying Files} -component StartCopyingFiles -active Yes -parent StandardInstall
 InstallComponent AC71C447-E0E6-480B-BA89-3B1BE14082FB -setup Install -type pane -title {Copying Files} -component CopyFiles -active Yes -parent StandardInstall
+InstallComponent C0CB807F-152D-4FF1-AF07-F97DD9317F4B -setup Install -type action -title {progress text} -component ExecuteScript -alias {progress text} -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
 InstallComponent 74E69AC2-8475-4FA5-8D2D-65F749B035BC -setup Install -type action -title {Disable Buttons} -component ModifyWidget -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
 InstallComponent D3BFD176-2E25-4F58-82CB-A080D79EBD77 -setup Install -type action -title {Install Everything} -component ExecuteAction -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
 InstallComponent 8F6CC918-6D44-4129-A7F4-D7BD02912D8F -setup Install -type action -title installBinary -component ExecuteAction -alias installBinary -active Yes -parent AC71C447-E0E6-480B-BA89-3B1BE14082FB
@@ -350,6 +351,7 @@ Condition A8E3BF88-17B8-4F9E-9300-94A6B14EE34B -active Yes -parent 0B11C207-6E76
 Condition E75FFFDF-F971-4BB2-AADA-62D8419B982C -active Yes -parent 0B11C207-6E76-4079-8867-CE85A45056FE -title {File Exists Condition} -component FileExistsCondition -TreeObject::id E75FFFDF-F971-4BB2-AADA-62D8419B982C
 InstallComponent E4259582-CD91-4E06-9251-143685D0D833 -setup Install -type actiongroup -title {Cancel Actions} -alias {Cancel Actions} -active Yes -parent ActionGroupsInstall
 InstallComponent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F -setup Install -type actiongroup -title installBinary -alias installbins -active Yes -parent ActionGroupsInstall
+InstallComponent 6B3D4828-A736-4195-B2F5-B5680BD1FCB1 -setup Install -type action -title {progress text} -component ExecuteScript -alias {progress text} -active Yes -parent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F
 InstallComponent 8E8170C0-C10E-4BC8-BEFF-C5F7C0B137AD -setup Install -type action -title {Unpack Stored File} -component UnpackStoredFile -active Yes -parent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F
 InstallComponent A7AD6977-00EB-4456-A7AC-BB095B6186FF -setup Install -type action -title {Unzip File} -component UnzipFile -active Yes -parent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F
 InstallComponent 4EA84232-D2DE-4166-A54B-5D24D73C44DA -setup Install -type action -title {Delete File} -component DeleteFile -active Yes -parent F3CD7A98-D8B3-4BF7-93B1-50BB7019E85F
@@ -851,6 +853,15 @@ array set Properties {
 69DA1B4B-DDA2-413F-B267-191801CA691B,Name
 {binaries}
 
+6B3D4828-A736-4195-B2F5-B5680BD1FCB1,Alias
+{progress text}
+
+6B3D4828-A736-4195-B2F5-B5680BD1FCB1,Conditions
+{0 conditions}
+
+6B3D4828-A736-4195-B2F5-B5680BD1FCB1,TclScript
+{::InstallAPI::SetVirtualText -virtualtext UnpackingFilesText -value "Installing and connfiguring MongoDB Please wait ....";}
+
 6BC87953-8E86-4961-92ED-B1BBCC028D75,CheckCondition
 {Before Action is Executed}
 
@@ -898,6 +909,9 @@ array set Properties {
 
 7378685A-6BC7-4AFF-89FE-DEE8162C2B3E,Widget
 {NextButton; CancelButton}
+
+74E69AC2-8475-4FA5-8D2D-65F749B035BC,Conditions
+{0 conditions}
 
 74E69AC2-8475-4FA5-8D2D-65F749B035BC,ExecuteAction
 {Before Pane is Displayed}
@@ -1334,6 +1348,15 @@ BD92E08F-EE16-4F3B-80AE-240911A4FCAC,Alias
 BDC08BD6-6200-410E-8F15-F3722DD96C78,ExitType
 {Finish}
 
+C0CB807F-152D-4FF1-AF07-F97DD9317F4B,Alias
+{progress text}
+
+C0CB807F-152D-4FF1-AF07-F97DD9317F4B,Conditions
+{0 conditions}
+
+C0CB807F-152D-4FF1-AF07-F97DD9317F4B,TclScript
+{::InstallAPI::SetVirtualText -virtualtext UnpackingFilesText -value "Installing  please wait ....";}
+
 C1007B50-7475-485D-9E05-EEB79FBC9666,CheckCondition
 {Before Action is Executed}
 
@@ -1393,6 +1416,9 @@ C92CEB72-65BF-4785-B8E0-25109C131ABA,String
 
 CA034F4E-8E2C-44DE-A870-4F8C6976E51D,Background
 {#FFFFFF}
+
+CA034F4E-8E2C-44DE-A870-4F8C6976E51D,Comment
+{provide the read me from repo root directory}
 
 CA034F4E-8E2C-44DE-A870-4F8C6976E51D,Conditions
 {2 conditions}
